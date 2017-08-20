@@ -10,13 +10,17 @@
   "author": "Joshua Hargreaves",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha tests --recursive"
+    "test": "mocha tests --compilers js:babel-core/register --recursive"
   },
   "dependencies": {
     "requireindex": "~1.1.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
     "eslint": "~3.9.1",
+    "flow-bin": "^0.53.1",
     "mocha": "^3.1.2"
   },
   "engines": {
