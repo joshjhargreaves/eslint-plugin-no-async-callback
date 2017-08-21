@@ -10,7 +10,8 @@
   "author": "Joshua Hargreaves",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha tests --compilers js:babel-core/register --recursive"
+    "test": "mocha tests --compilers js:babel-core/register --recursive",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"{tests}/**/*.js\""
   },
   "dependencies": {
     "requireindex": "~1.1.0"
@@ -21,7 +22,8 @@
     "babel-preset-flow": "^6.23.0",
     "eslint": "~3.9.1",
     "flow-bin": "^0.53.1",
-    "mocha": "^3.1.2"
+    "mocha": "^3.1.2",
+    "prettier": "^1.5.3"
   },
   "engines": {
     "node": ">=0.10.0"
