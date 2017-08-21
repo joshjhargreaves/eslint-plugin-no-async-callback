@@ -11,7 +11,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha tests --compilers js:babel-core/register --recursive",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write \"{tests}/**/*.js\""
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"{tests,lib}/**/*.js\""
   },
   "dependencies": {
     "requireindex": "~1.1.0"
