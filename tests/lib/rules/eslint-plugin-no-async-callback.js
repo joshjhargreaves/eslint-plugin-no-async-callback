@@ -8,7 +8,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/eslint-plugin-no-async-callback'),
+var rule = require('../../../src/rules/eslint-plugin-no-async-callback'),
   RuleTester = require('eslint').RuleTester;
 
 //------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ var rule = require('../../../lib/rules/eslint-plugin-no-async-callback'),
 
 const ASYNC_FUNC_ERROR = `Async tests must use async functions and async-await instead of 'done' arguments.`;
 
-var ruleTester = new RuleTester();
+var ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2015 } });
 ruleTester.run('eslint-plugin-no-async-callback', rule, {
   valid: [
     `describe("describe1", function() {
@@ -34,13 +34,27 @@ ruleTester.run('eslint-plugin-no-async-callback', rule, {
     {
       code: [
         'describe("describe1", function() {',
-        'it("it1", function(done) {});',
+        '  it("it1", function(done) {});',
         '});',
       ].join('\n'),
       errors: [
         {
           message: ASYNC_FUNC_ERROR,
-          column: 11,
+          column: 13,
+          line: 2,
+        },
+      ],
+    },
+    {
+      code: [
+        'describe("describe1", function() {',
+        '  it("it1", done => {});',
+        '});',
+      ].join('\n'),
+      errors: [
+        {
+          message: ASYNC_FUNC_ERROR,
+          column: 13,
           line: 2,
         },
       ],
@@ -49,6 +63,7 @@ ruleTester.run('eslint-plugin-no-async-callback', rule, {
       code: [
         'it("it1", function(done) {});',
         'it("it1", function(x) {});',
+        'it("it1", done => {});',
       ].join('\n'),
       errors: [
         {
@@ -60,6 +75,11 @@ ruleTester.run('eslint-plugin-no-async-callback', rule, {
           message: ASYNC_FUNC_ERROR,
           column: 11,
           line: 2,
+        },
+        {
+          message: ASYNC_FUNC_ERROR,
+          column: 11,
+          line: 3,
         },
       ],
     },

@@ -46,7 +46,7 @@ const isFirstArgLiteral = node =>
 const isSecondArgFunctionExpression = node =>
   node.arguments &&
   node.arguments.length > 1 &&
-  node.arguments[1].type === 'FunctionExpression';
+  (node.arguments[1].type === 'FunctionExpression' || node.arguments[1].type === 'ArrowFunctionExpression');
 
 // TODO: add FunctionExpression type to Node
 const doesNodeHaveParams = (node: any) => node.params && node.params.length > 0;
@@ -66,6 +66,7 @@ module.exports = {
   create: function(context: EslintContext) {
     return {
       CallExpression(node: CallExpression) {
+        console.log(node.arguments[1]);
         if (
           isTestCase(node) &&
           isFirstArgLiteral(node) &&
