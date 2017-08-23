@@ -9,9 +9,14 @@
   ],
   "author": "Joshua Hargreaves",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "mocha tests --compilers js:babel-core/register --recursive",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write \"{tests,lib}/**/*.js\""
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"{tests,lib}/**/*.js\"",
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile"
   },
   "dependencies": {
     "requireindex": "~1.1.0"
